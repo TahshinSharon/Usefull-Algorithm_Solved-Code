@@ -34,6 +34,13 @@ vector<int>getfact(int x) {
 	}
 	return ret;
 }
+bool prime(int n) {
+if (n < 2) return false;
+for (int x = 2; x*x <= n; x++) {
+if (n%x == 0) return false;
+}
+return true;
+}
 void solve() {
 	int n;
 	cin >> n;
