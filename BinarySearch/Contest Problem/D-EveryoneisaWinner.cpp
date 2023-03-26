@@ -19,7 +19,7 @@ void solve() {
 		s.insert((n / i));
 	}
 	cout << s.size() << nline;
-	for (auto x : i++) {
+	for (auto x : s) {
 		cout << x << " ";
 	}
 	cout << nline;
