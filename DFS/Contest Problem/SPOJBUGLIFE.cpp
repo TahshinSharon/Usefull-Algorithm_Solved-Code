@@ -17,29 +17,40 @@ const int N = 1e6 + 5;
 vector<int>g[N];
 int vis[N];
 int col[N];
-int biper(int ver, int c) {
+int f = 1;
+void biper(int ver, int c) {
 	col[ver] = c;
 	vis[ver] = 1;
 	for (auto cld : g[ver]) {
 		if (!vis[cld]) {
 			biper(cld, c ^ 1);
 		}
-		else if (col[ver] == c) {
-			return 0;
+		else if (col[cld] == c) {
+			f = 0;
 		}
 	}
-	return 1;
 }
 void solve() {
 	int n, m;
 	cin >> n >> m;
+	for (int i = 1; i <= n; i++) {
+		vis[i] = 0;
+		col[i] = 0;
+		g[i].clear();
+	}
 	for (int i = 0; i < m; i++) {
 		int x, y;
 		cin >> x >> y;
 		g[x].push_back(y);
 		g[y].push_back(x);
 	}
-	if (biper(1, 0)) {
+	f = 1;
+	for (int i = 1; i <= n; i++) {
+		if (!vis[i]) {
+			biper(i, 0);
+		}
+	}
+	if (!f) {
 		cout << "Suspicious bugs found!" << nline;
 	}
 	else {
